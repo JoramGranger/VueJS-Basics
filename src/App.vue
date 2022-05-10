@@ -1,26 +1,25 @@
-<!--computed properties
+<!--watchers
 -->
 <template>
-  <h2>Fullname - {{ fname }} {{ lname }}</h2>
-  <h2>computed Fullname - {{ fullName }}</h2>
+  <h2>Volume Tracker (0 -20)</h2>
+  <h3>Current volume -{{ volume }}</h3>
+  <div><button @click="volume += 2">Increase</button><button @click="volume -= 2">Decrease</button></div>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  data() { return {
-    fname: 'Stephen', lname: 'Strange',
-    items: [{id: 1, title: 'TV', price: 100,}, {id: 2, title: 'phone', price: 200,}, {id: 3, title: 'laptop', price: 300,}],  
-  }},
-  //
-  methods: {
-        
+  data() { 
+    return {volume: 0}
   },
-  computed: {
-      fullName() {return `${this.fname} ${this.lname}`}
-    }
+  // methods
+  methods: {},
+  // computed
+  computed: {},
+  watch:{
+    volume(newValue, oldValue) {if(newValue > oldValue && newValue === 16){alert('High Volume can damage your ears')}},
+  }
 };
 </script>
 
