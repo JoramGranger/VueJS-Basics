@@ -1,29 +1,8 @@
-<!--form handling
+<!--computed properties
 -->
 <template>
-  <form @submit="submitForm">
-    <div><prev>{{ JSON.stringify(formValues, null, 2)}}</prev></div>
-    <div><label for="name">Name</label><input type="text" id="name" v-model="formValues.name"></div>
-    <div><label for="profile">Profile Summary</label><textarea id="profile" v-model="formValues.profileSummary"/></div>
-    <div><label for="country">Country</label><select id="country" v-model="formValues.countries">
-      <option v-for="country in countries" :key="country" v-bind:value="country">{{country}}</option>
-    </select></div>
-    <div><label for="job-location">Job Location</label><select id="job-location" multiple v-model="formValues.jobLocation">
-      <option v-for="country in countries" :key="country" v-bind:value="country">{{country}}</option>
-    </select></div>
-    <div><input type="checkbox" id="remoteWork" v-model="formValues.remoteWork" true-value="yes" false-value="no"/><label for="remoteWork">Open to remote work?</label></div>
-    <label>Skill Set</label>
-    <template v-for="skill in skills" :key="skill">
-      <input type="checkbox"  v-bind:id="skill" v-bind:value="skill" v-model="formValues.skillSet" />
-      <label v-bind:for="skill">{{skill}}</label>
-    </template>
-    <label>Year of Experience</label>
-    <template v-for="exp in experience" :key="exp">
-      <input type="radio"  v-bind:id="exp" v-bind:value="exp" v-model="formValues.experience" />
-      <label v-bind:for="exp">{{exp}}</label>
-    </template>
-    </form>
-
+  <h2>Fullname - {{ fname }} {{ lname }}</h2>
+  <h2>computed Fullname - {{ fullName }}</h2>
 </template>
 
 <script>
@@ -32,13 +11,16 @@
 export default {
   name: 'App',
   data() { return {
-    formValues: {name: '', profileSummary: '', country: '', jobLocation: '', remoteWork: 'no', skillSet: [], experience: ''},
-    countries: ['India', 'Vietnam', 'Singapore'], skills: ['css', 'javascript', 'html'], experience: ['0-2', '3-5', '6-10', '10+']
+    fname: 'Stephen', lname: 'Strange',
+    items: [{id: 1, title: 'TV', price: 100,}, {id: 2, title: 'phone', price: 200,}, {id: 3, title: 'laptop', price: 300,}],  
   }},
   //
   methods: {
-    submitForm(event){event.preventDefault(), console.log('Form Values', this.formValues)}
-  }
+        
+  },
+  computed: {
+      fullName() {return `${this.fname} ${this.lname}`}
+    }
 };
 </script>
 
